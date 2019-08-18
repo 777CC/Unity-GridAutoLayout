@@ -1,0 +1,13 @@
+{
+  "name": "com.amaze.gridautolayout",
+  "displayName": "Grid Auto Layout",
+  "version": "1.0.0",
+  "unity": "2018.3",
+  "description": "Grid Auto Layout for Unity",
+  "keywords": [
+    "unity",
+    "stats",
+    "tracker"
+  ],
+  "category": "Productivity"
+}
