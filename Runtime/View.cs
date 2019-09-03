@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class View : MonoBehaviour, IPointerEnterHandler
+public class View : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Button Fullscreen;
     public delegate void LayoutCall(View view);
@@ -12,17 +12,15 @@ public class View : MonoBehaviour, IPointerEnterHandler
     //public LayoutCall ToFullScreen;
     private int OldIndex;
     private RectTransform rect;
-    private Vector2 oldAnchorMin, oldAnchorMax, oldOffsetMin, oldOffsetMax;
+    private Vector2 oldAnchorMin, oldAnchorMax, oldOffsetMin, oldOffsetMax,oldSize;
+    private Vector3 oldPos;
+    private Transform oldParent;
     public bool isFullScreen = false;
     public Rect recttest;
+
     public void Start()
     {
-        OldIndex = transform.GetSiblingIndex();
         rect = GetComponent<RectTransform>();
-        oldAnchorMin = rect.anchorMin;
-        oldAnchorMax = rect.anchorMax;
-        oldOffsetMin = rect.offsetMin;
-        oldOffsetMax = rect.offsetMax;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -38,9 +36,23 @@ public class View : MonoBehaviour, IPointerEnterHandler
 
     public void ShowFullScreen()
     {
-        Debug.Log("amin : " + rect.anchorMin + " amax : " + rect.anchorMax + " omin : " + rect.offsetMin + " omax : " + rect.offsetMax);
+        Debug.Log("pos : " + rect.anchoredPosition3D + " old: " + oldPos);
+        //Debug.Log("pos : " + rect.anchoredPosition3D + "amin : " + rect.anchorMin + " amax : " + rect.anchorMax + " omin : " + rect.offsetMin + " omax : " + rect.offsetMax);
         if (!isFullScreen)
         {
+            Canvas cv = GetComponentInParent<Canvas>();
+            
+            //Save old rect.
+            oldParent = transform.parent;
+            OldIndex = transform.GetSiblingIndex();
+            oldPos = rect.anchoredPosition3D;
+            oldAnchorMin = rect.anchorMin;
+            oldAnchorMax = rect.anchorMax;
+            oldOffsetMin = rect.offsetMin;
+            oldOffsetMax = rect.offsetMax;
+            oldSize = rect.sizeDelta;
+            //Move to top.
+            transform.SetParent(cv.transform);
             transform.SetSiblingIndex(transform.parent.childCount - 1);
             rect.anchorMin = Vector2.zero;
             rect.anchorMax = Vector2.one;
@@ -50,16 +62,28 @@ public class View : MonoBehaviour, IPointerEnterHandler
         }
         else
         {
+            transform.SetParent(oldParent);
+            
+            transform.SetSiblingIndex(OldIndex);
+            
+
+            
             rect.anchorMin = oldAnchorMin;
             rect.anchorMax = oldAnchorMax;
             rect.offsetMin = oldOffsetMin;
-            rect.offsetMax = oldOffsetMax;
-            transform.SetSiblingIndex(OldIndex);
+            rect.offsetMax = oldOffsetMax;  
+            rect.anchoredPosition = oldPos;
+
+
             isFullScreen = false;
+
+            
         }
+        Debug.Log("pos : " + rect.anchoredPosition3D + " old: " + oldPos);
     }
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    Fullscreen.gameObject.SetActive(false);
-    //}
+    
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Fullscreen.gameObject.SetActive(false);
+    }
 }
