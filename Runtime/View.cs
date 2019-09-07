@@ -22,12 +22,9 @@ public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHand
         rect = GetComponent<RectTransform>();
     }
 
-    public void Play(string path)
+    public virtual void Play(string path)
     {
-        //player.Path = "rtsp://" + path;
-        //player.Play();
         Debug.Log("Startttt : " + path);
-
     }
 
     public void OnPointerEnter(PointerEventData eventData)

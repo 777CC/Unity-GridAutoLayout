@@ -1,8 +1,6 @@
 {
     "name": "com.amaze.gridautolayout.Tests.Editor",
-    "references": [
-        "GUID:81406555d2574554eb020a6ef52ec258"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

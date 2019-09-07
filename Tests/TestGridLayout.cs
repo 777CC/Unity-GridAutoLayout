@@ -15,18 +15,18 @@ public class TestGridLayout : MonoBehaviour
     public void Test()
     {
         GameObject go = Instantiate(Resources.Load<GameObject>("rtsp"), layout.transform);
-        View v = go.GetComponent<View>();
+        //View v = go.GetComponent<View>();
+        //IView v = Instantiate(Resources.Load<GameObject>("rtsp"));
         layout.viewList = new ViewData[1];
         ViewData vData = new ViewData();
-        vData.View = v;
+        vData.View = go.GetComponent<IView>();
         vData.Column = 2;
         vData.Row = 1;
         vData.Width = 1;
         vData.Height = 1;
         vData.Scheme = ViewScheme.RTSP;
         vData.Path = "wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
-        IView iv = go.GetComponent<IView>();
-        iv.Play(vData.Path);
+        vData.View.Play(vData.Path);
         //v.Play(vData.Path);
         layout.viewList[0] = vData;
         layout.UpdateLayout();
