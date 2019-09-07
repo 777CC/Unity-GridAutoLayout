@@ -33,9 +33,11 @@ public class AutoSizingGridLayout : MonoBehaviour
         Debug.Log(layoutRect.sizeDelta.x + " : " + Column + " : " + sizeX + " : " + sizeY);
         foreach (var v in viewList)
         {
-            v.View.HideOtherViewButton = FocusOnView;
-            GameObject go = v.View.gameObject;
-            RectTransform r = go.GetComponent<RectTransform>();
+            //v.View.HideOtherViewButton = FocusOnView;
+            //GameObject go = v.View.gameObject;
+            //RectTransform r = go.GetComponent<RectTransform>();
+            v.View.SetOnLayoutCall(FocusOnView);
+            RectTransform r = v.View.GetRectTranform();
             r.anchorMin = new Vector2(0, 0.5f);
             r.anchorMax = new Vector2(0, 0.5f);
             r.pivot = Vector2.zero;
@@ -50,11 +52,11 @@ public class AutoSizingGridLayout : MonoBehaviour
         }
     }
 
-    void FocusOnView(View view)
+    void FocusOnView(IView v)
     {
         foreach (var vData in viewList)
         {
-            if (vData.View != view) vData.View.Unfocus();
+            if (vData.View != v) vData.View.Unfocus();
         }
     }
 

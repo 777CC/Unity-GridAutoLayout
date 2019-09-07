@@ -8,7 +8,6 @@ public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHand
 {
     public string Path;
     public Button Fullscreen;
-    public delegate void LayoutCall(View view);
     public LayoutCall HideOtherViewButton;
     //public LayoutCall ToFullScreen;
     private int OldIndex;
@@ -28,6 +27,7 @@ public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHand
         //player.Path = "rtsp://" + path;
         //player.Play();
         Debug.Log("Startttt : " + path);
+
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -101,5 +101,14 @@ public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHand
         {
             Fullscreen.gameObject.SetActive(false);
         }
+    }
+
+    public void SetOnLayoutCall(LayoutCall layoutCall)
+    {
+        HideOtherViewButton = layoutCall;
+    }
+    public RectTransform GetRectTranform()
+    {
+        return GetComponent<RectTransform>();
     }
 }

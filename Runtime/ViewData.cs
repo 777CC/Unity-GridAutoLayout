@@ -8,7 +8,7 @@ public enum ViewScheme
 [System.Serializable]
 public struct ViewData
 {
-    public View View;
+    public IView View;
     public ViewScheme Scheme;
     public string Path;
     public int Column;
