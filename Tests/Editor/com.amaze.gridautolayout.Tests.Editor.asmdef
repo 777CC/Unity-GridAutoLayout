@@ -1,7 +1,7 @@
 {
-    "name": "com.amaze.gridautolayout.Runtime",
+    "name": "com.amaze.gridautolayout.Tests.Editor",
     "references": [
-        "com.bacom.core.Runtime"
+        "GUID:81406555d2574554eb020a6ef52ec258"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

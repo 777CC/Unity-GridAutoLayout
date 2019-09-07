@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
-public class View : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+//using UMP;
+public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHandler
 {
+    public string Path;
     public Button Fullscreen;
     public delegate void LayoutCall(View view);
     public LayoutCall HideOtherViewButton;
@@ -16,22 +17,34 @@ public class View : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private Vector3 oldPos;
     private Transform oldParent;
     public bool isFullScreen = false;
-    public Rect recttest;
-
+    //public UniversalMediaPlayer player;
     public void Start()
     {
         rect = GetComponent<RectTransform>();
     }
 
+    public void Play(string path)
+    {
+        //player.Path = "rtsp://" + path;
+        //player.Play();
+        Debug.Log("Startttt : " + path);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         HideOtherViewButton?.Invoke(this);
-        Fullscreen.gameObject.SetActive(true);
+        if (Fullscreen != null)
+        {
+            Fullscreen.gameObject.SetActive(true);
+        }
     }
 
     public void Unfocus()
     {
-        Fullscreen.gameObject.SetActive(false);
+        if (Fullscreen != null)
+        {
+            Fullscreen.gameObject.SetActive(false);
+        }
     }
 
     public void ShowFullScreen()
@@ -84,6 +97,9 @@ public class View : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     
     public void OnPointerExit(PointerEventData eventData)
     {
-        Fullscreen.gameObject.SetActive(false);
+        if (Fullscreen != null)
+        {
+            Fullscreen.gameObject.SetActive(false);
+        }
     }
 }

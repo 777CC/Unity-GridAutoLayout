@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Layout : MonoBehaviour
+public class AutoSizingGridLayout : MonoBehaviour
 {
     [SerializeField]
     int Column = 1;
@@ -17,6 +17,11 @@ public class Layout : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UpdateLayout();
+    }
+
+    public void UpdateLayout()
+    {
         //foreach(var v in views)
         //{
         //    v.HideOtherViewButton = FocusOnView;
@@ -30,16 +35,18 @@ public class Layout : MonoBehaviour
         {
             v.View.HideOtherViewButton = FocusOnView;
             GameObject go = v.View.gameObject;
-            RectTransform rect = go.GetComponent<RectTransform>();
-            rect.anchorMin = new Vector2(0, 0.5f);
-            rect.anchorMax = new Vector2(0, 0.5f);
-            rect.pivot = Vector2.zero;
+            RectTransform r = go.GetComponent<RectTransform>();
+            r.anchorMin = new Vector2(0, 0.5f);
+            r.anchorMax = new Vector2(0, 0.5f);
+            r.pivot = Vector2.zero;
             //rect.anchoredPosition3D = new Vector3(v.Column, v.Row,0);
             //rect.sizeDelta = new Vector2(100, 100);
 
-            rect.anchoredPosition3D = new Vector3((v.Column - 1) * sizeX,(v.Row - 1) * -sizeY, 0);
-            rect.sizeDelta = new Vector2(sizeX, sizeY);
-
+            r.anchoredPosition3D = new Vector3((v.Column - 1) * sizeX, (v.Row - 1) * -sizeY, 0);
+            r.sizeDelta = new Vector2(sizeX, sizeY);
+            
+            Debug.Log(r.anchoredPosition3D + r.gameObject.name);
+            //Canvas.ForceUpdateCanvases();
         }
     }
 
