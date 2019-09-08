@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-//using UMP;
 public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHandler
 {
     public string Path;
@@ -16,7 +15,6 @@ public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHand
     private Vector3 oldPos;
     private Transform oldParent;
     public bool isFullScreen = false;
-    //public UniversalMediaPlayer player;
     public void Start()
     {
         rect = GetComponent<RectTransform>();
@@ -24,7 +22,7 @@ public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHand
 
     public virtual void Play(string path)
     {
-        Debug.Log("Startttt : " + path);
+        
     }
 
     public void OnPointerEnter(PointerEventData eventData)

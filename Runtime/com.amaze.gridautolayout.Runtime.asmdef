@@ -1,8 +1,6 @@
 {
     "name": "com.amaze.gridautolayout.Runtime",
-    "references": [
-        "com.bacom.core.Runtime"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
