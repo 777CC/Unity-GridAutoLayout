@@ -7,7 +7,7 @@ public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHand
 {
     public string Path;
     public Button Fullscreen;
-    public LayoutCall HideOtherViewButton;
+    private LayoutCall HideOtherViewButton;
     //public LayoutCall ToFullScreen;
     private int OldIndex;
     private RectTransform rect;
@@ -100,6 +100,7 @@ public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHand
 
     public void SetOnLayoutCall(LayoutCall layoutCall)
     {
+        Debug.Log("SetOnLayoutCall");
         HideOtherViewButton = layoutCall;
     }
     public RectTransform GetRectTranform()

@@ -8,7 +8,8 @@ public class AutoSizingGridLayout : MonoBehaviour
     int Column = 1;
     [SerializeField]
     int Row = 1;
-    public ViewData[] viewList;
+    [SerializeField]
+    private ViewData[] viewList;
     //public View[] views;
     Vector2 anchorMin = Vector2.zero;
     Vector2 anchorMax = Vector2.one;
@@ -17,6 +18,19 @@ public class AutoSizingGridLayout : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UpdateLayout();
+    }
+
+    public void SetContent(ViewData[] dataList)
+    {
+        viewList = dataList;
+        for (int i = 0;i < viewList.Length;i++)
+        {
+            ViewData v = viewList[i];
+            GameObject go = Instantiate(Resources.Load<GameObject>(viewList[i].Scheme.ToString()), transform);
+            viewList[i].View = go.GetComponent<IView>();
+            viewList[i].View.Play(v.Path);
+        }
         UpdateLayout();
     }
 
