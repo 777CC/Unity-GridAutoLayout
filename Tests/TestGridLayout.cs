@@ -7,6 +7,7 @@ public class TestGridLayout : MonoBehaviour
 {
     public Transform panelTran;
     public TextAsset text;
+    public TextAsset text1;
     public AutoSizingGridLayout layout;
     // Start is called before the first frame update
     void Start()
@@ -48,22 +49,27 @@ public class TestGridLayout : MonoBehaviour
 
     public void TestGrid()
     {
-        ViewLoader.Load(panelTran, ViewScheme.Grid, "2:2@test/?video001=RTSP,wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov,1,1,1,1&SubGrid=Grid,,1,1,1,1");
-        //ViewLoader.Load(panelTran, ViewScheme.Grid, text.text);
+        //ViewLoader.Load(panelTran, ViewScheme.Grid, "2:2@test/?video001=RTSP,wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov,1,1,1,1&SubGrid=Grid,,1,1,1,1");
+        ViewLoader.Load(panelTran, ViewScheme.Grid, text.text);
+
+        //GridContentData grid = new GridContentData(ViewScheme.Grid, text1.text,2,1,1,1);
+
         //LayoutData layout2 = new LayoutData();
         //layout2.Name = "Child";
         //layout2.Column = 2;
         //layout2.Row = 2;
         //layout2.views = new GridContentData[1];
-        //layout2.views[0] = new GridContentData(ViewScheme.RTSP, "wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov",1,1,1,1);
+        //layout2.views[0] = new GridContentData(ViewScheme.RTSP, "wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov", 1, 1, 1, 1);
         //LayoutData layout = new LayoutData();
         //layout.Name = "Main";
         //layout.Column = 2;
         //layout.Row = 2;
         //layout.views = new GridContentData[1];
-        //layout.views[0] = new GridContentData(ViewScheme.Grid, JsonUtility.ToJson(layout2,true), 2, 1, 1, 1);
+        //layout.views[0] = new GridContentData(ViewScheme.Grid, layout2, 2, 1, 1, 1);
+        //string data = JsonUtility.ToJson(layout);
+        //Debug.Log(data);
+        //ViewLoader.Load(panelTran, ViewScheme.Grid, data);
 
-        //ViewLoader.Load(panelTran, ViewScheme.Grid,JsonUtility.ToJson(layout,true));
         //string uri = @"http://2:2@test/?video001=RTSP,wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov,1,1,1,1";
         //Uri test = new Uri(uri);
         //Debug.Log("Name : " + test.UserInfo + " col : " + test.Host + " row : " + test.Port + " query : " + test.Query);

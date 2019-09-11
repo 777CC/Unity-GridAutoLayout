@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[System.Serializable]
-//public struct LayoutData
-//{
-//    public string Name;
-//    public GridContentData[] views;
-//    public int Column;
-//    public int Row;
-//}
+[System.Serializable]
+public struct LayoutData
+{
+    public string Name;
+    public GridContentData[] views;
+    public int Column;
+    public int Row;
+}
 
 
 public class AutoSizingGridLayout : View
@@ -43,46 +43,51 @@ public class AutoSizingGridLayout : View
         //string[] data = path.Split('/');
         //Name = data[0];
         //Debug.Log(data[1]);
-        //Debug.Log(path);
-        //LayoutData l = JsonUtility.FromJson<LayoutData>(path);
-        //Name = l.Name;
-        //Column = l.Column;
-        //Row = l.Row;
-        //SetContent(l.views);
-        Uri grid = new Uri(httpScheme + path);
+        //string prepared = path.Replace('"'.ToString(), "\\\"");
+        Debug.Log(path);
+        
+        LayoutData l = JsonUtility.FromJson<LayoutData>(path);
+        Name = l.Name;
+        Column = l.Column;
+        Row = l.Row;
+        SetContent(l.views);
 
-        //Define grid column and row.
-        string[] size = grid.UserInfo.Split(':');
-        if (size.Length != 2) return;
-        Column = int.Parse(size[0]);
-        Row = int.Parse(size[1]);
 
-        //Define grid name.
-        Name = grid.Host;
 
-        //Define grid content.
-        string contentValue = grid.Query.Substring(1);
-        string[] contentData = contentValue.Split('&');
-        GridContentData[] contents = new GridContentData[contentData.Length];
-        for(int i = 0; i < contentData.Length; i++)
-        {
-            string[] nameandvalue = contentData[i].Split('=');
-            string name = nameandvalue[0];
-            string[] values = nameandvalue[1].Split(',');
-            if(values.Length == 6)
-            {
-                Debug.Log(values[0] + values[1]);
-                ViewScheme scheme = (ViewScheme)Enum.Parse(typeof(ViewScheme), values[0]);
-                string contentPath = values[1];
-                int col = int.Parse(values[2]);
-                int row = int.Parse(values[3]);
-                int w = int.Parse(values[4]);
-                int h = int.Parse(values[5]);
-                contents[i] = new GridContentData(scheme, contentPath, col, row, w, h);
-            }
-        }
+        //Uri grid = new Uri(httpScheme + path);
 
-        SetContent(contents);
+        ////Define grid column and row.
+        //string[] size = grid.UserInfo.Split(':');
+        //if (size.Length != 2) return;
+        //Column = int.Parse(size[0]);
+        //Row = int.Parse(size[1]);
+
+        ////Define grid name.
+        //Name = grid.Host;
+
+        ////Define grid content.
+        //string contentValue = grid.Query.Substring(1);
+        //string[] contentData = contentValue.Split('&');
+        //GridContentData[] contents = new GridContentData[contentData.Length];
+        //for(int i = 0; i < contentData.Length; i++)
+        //{
+        //    string[] nameandvalue = contentData[i].Split('=');
+        //    string name = nameandvalue[0];
+        //    string[] values = nameandvalue[1].Split(',');
+        //    if(values.Length == 6)
+        //    {
+        //        Debug.Log(values[0] + values[1]);
+        //        ViewScheme scheme = (ViewScheme)Enum.Parse(typeof(ViewScheme), values[0]);
+        //        string contentPath = values[1];
+        //        int col = int.Parse(values[2]);
+        //        int row = int.Parse(values[3]);
+        //        int w = int.Parse(values[4]);
+        //        int h = int.Parse(values[5]);
+        //        contents[i] = new GridContentData(scheme, contentPath, col, row, w, h);
+        //    }
+        //}
+
+        //SetContent(contents);
     }
 
     private void SetContent(GridContentData[] dataList)
@@ -90,7 +95,17 @@ public class AutoSizingGridLayout : View
         viewList = dataList;
         for (int i = 0;i < viewList.Length;i++)
         {
-            viewList[i].View =  ViewLoader.Load(transform, viewList[i].Scheme, viewList[i].Path);
+            if (!string.IsNullOrEmpty(viewList[i].Path) && viewList[i].Path != "Null")
+            {
+                Debug.Log(viewList[i].Path);
+                viewList[i].View = ViewLoader.Load(transform, viewList[i].Scheme, viewList[i].Path);
+            }
+            else
+            {
+                string data = JsonUtility.ToJson(viewList[i].Content);
+                Debug.Log(data);
+                viewList[i].View = ViewLoader.Load(transform, viewList[i].Scheme, data);
+            }
             //ViewLoader.Load(transform,viewList[i]);
             //viewList[i].View = ViewLoader.Load(transform, viewList[i].Scheme);
             //viewList[i].View.Setup(viewList[i].Path);

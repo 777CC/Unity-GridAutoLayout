@@ -859,6 +859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelTran: {fileID: 1329551946}
   text: {fileID: 4900000, guid: 79cef088c72128b4487484d390e13e68, type: 3}
+  text1: {fileID: 4900000, guid: 0a9d113a0b83b6a49a9649ab12e7c511, type: 3}
   layout: {fileID: 339864752}
 --- !u!4 &2036181083
 Transform:
