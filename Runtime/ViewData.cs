@@ -3,12 +3,13 @@
 public enum ViewScheme
 {
     RTSP,
-    Map
+    Map,
+    Grid,
 }
 [System.Serializable]
-public struct ViewData
+public class GridContentData
 {
-    public ViewData(ViewScheme vs,string path,int col,int row,int w,int h)
+    public GridContentData(ViewScheme vs,string path,int col,int row,int w,int h)
     {
         Scheme = vs;
         View = null;

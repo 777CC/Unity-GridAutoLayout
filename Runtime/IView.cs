@@ -7,6 +7,6 @@ public interface IView
 {
     void SetOnLayoutCall(LayoutCall layoutCall);
     RectTransform GetRectTranform();
-    void Play(string path);
+    void Setup(string path);
     void Unfocus();
 }

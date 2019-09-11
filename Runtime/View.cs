@@ -5,22 +5,24 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHandler
 {
+    public string Name;
     public string Path;
     public Button Fullscreen;
     private LayoutCall HideOtherViewButton;
     //public LayoutCall ToFullScreen;
-    private int OldIndex;
     private RectTransform rect;
+    private int OldIndex;
     private Vector2 oldAnchorMin, oldAnchorMax, oldOffsetMin, oldOffsetMax,oldSize;
     private Vector3 oldPos;
     private Transform oldParent;
-    public bool isFullScreen = false;
+    [HideInInspector]
+    protected bool isFullScreen = false;
     public void Start()
     {
-        rect = GetComponent<RectTransform>();
+        rect = GetRectTranform();
     }
 
-    public virtual void Play(string path)
+    public virtual void Setup(string path)
     {
         
     }
