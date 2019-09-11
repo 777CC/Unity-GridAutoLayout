@@ -48,6 +48,7 @@ public class TestGridLayout : MonoBehaviour
 
     public void TestGrid()
     {
+        ViewLoader.Load(panelTran, ViewScheme.Grid, "2:2@test/?video001=RTSP,wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov,1,1,1,1&SubGrid=Grid,,1,1,1,1");
         //ViewLoader.Load(panelTran, ViewScheme.Grid, text.text);
         //LayoutData layout2 = new LayoutData();
         //layout2.Name = "Child";
@@ -63,8 +64,8 @@ public class TestGridLayout : MonoBehaviour
         //layout.views[0] = new GridContentData(ViewScheme.Grid, JsonUtility.ToJson(layout2,true), 2, 1, 1, 1);
 
         //ViewLoader.Load(panelTran, ViewScheme.Grid,JsonUtility.ToJson(layout,true));
-        string uri = @"http://2:2@test/?tag=2:2@test/?tag=&order=newest&order=newest";
-        Uri test = new Uri(uri);
-        Debug.Log("Name : " + test.UserInfo + " col : " + test.Host + " row : " + test.Port + " query : " + test.Query);
+        //string uri = @"http://2:2@test/?video001=RTSP,wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov,1,1,1,1";
+        //Uri test = new Uri(uri);
+        //Debug.Log("Name : " + test.UserInfo + " col : " + test.Host + " row : " + test.Port + " query : " + test.Query);
     }
 }

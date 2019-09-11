@@ -51,7 +51,6 @@ public class AutoSizingGridLayout : View
         //SetContent(l.views);
         Uri grid = new Uri(httpScheme + path);
 
-
         //Define grid column and row.
         string[] size = grid.UserInfo.Split(':');
         if (size.Length != 2) return;
@@ -61,23 +60,25 @@ public class AutoSizingGridLayout : View
         //Define grid name.
         Name = grid.Host;
 
-
-
-        string[] contentData = path.Split('|');
-
+        //Define grid content.
+        string contentValue = grid.Query.Substring(1);
+        string[] contentData = contentValue.Split('&');
         GridContentData[] contents = new GridContentData[contentData.Length];
         for(int i = 0; i < contentData.Length; i++)
         {
-            string[] values = contentData[i].Split(',');
+            string[] nameandvalue = contentData[i].Split('=');
+            string name = nameandvalue[0];
+            string[] values = nameandvalue[1].Split(',');
             if(values.Length == 6)
             {
+                Debug.Log(values[0] + values[1]);
                 ViewScheme scheme = (ViewScheme)Enum.Parse(typeof(ViewScheme), values[0]);
-                string name = values[1];
+                string contentPath = values[1];
                 int col = int.Parse(values[2]);
                 int row = int.Parse(values[3]);
                 int w = int.Parse(values[4]);
                 int h = int.Parse(values[5]);
-                contents[i] = new GridContentData(scheme, name, col, row, w, h);
+                contents[i] = new GridContentData(scheme, contentPath, col, row, w, h);
             }
         }
 
