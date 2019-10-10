@@ -1,8 +1,6 @@
 {
-    "name": "com.amaze.gridautolayout.Runtime",
-    "references": [
-        "com.amaze.gridautolayout.Runtime.Resources"
-    ],
+    "name": "com.amaze.gridautolayout.Runtime.Resources",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
