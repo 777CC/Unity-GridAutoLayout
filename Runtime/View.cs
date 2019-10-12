@@ -27,6 +27,11 @@ public class View : MonoBehaviour, IView, IPointerEnterHandler, IPointerExitHand
         
     }
 
+    public virtual void Setup(Device)
+    {
+
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         HideOtherViewButton?.Invoke(this);
